@@ -78,8 +78,8 @@ libvips: installLib libheif libwebp
 # 	cd vips-$(VIPS_VERSION)/tools && ./vips rot $(EXAMPLE_IMAGE_PATH)/example.heic $(EXAMPLE_IMAGE_PATH)/example-rot.jpeg d90
 
 installLib:
-	dnf groupinstall -y "Development Tools" && \
-	dnf install -y \
+	yum groupinstall -y "Development Tools" && \
+	yum install -y \
 		glib2-devel \
 		expat-devel \
 		libjpeg-turbo-devel \
