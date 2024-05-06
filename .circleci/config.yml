@@ -12,7 +12,11 @@ jobs:
 
     steps:
       - checkout
-      - run: node --version     
+      - run: node --version    
+      - run: wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-arm64.zip  
+      - run: unzip aws-sam-cli-linux-arm64.zip -d sam-installation
+      - run: sudo ./sam-installation/install
+      
       # - restore_cache:
       #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
           
