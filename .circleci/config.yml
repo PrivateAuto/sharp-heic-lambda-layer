@@ -17,10 +17,9 @@ jobs:
       #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
           
       - run: | 
-            - NODE_ENV=development
-            '''''
-            - npm ci 
-            - npm run build
+          NODE_ENV=development
+          npm ci 
+          npm run build
 
       # - save_cache:
       #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
