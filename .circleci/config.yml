@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  build-layer:
+    environment:
+      NODE_ENV: "production"
+      DISABLE_OPENCOLLECTIVE: "true"
+      SAM_CLI_TELEMETRY: 0
+
+    docker:
+      - image: cimg/node:lts
+
+    steps:
+      - checkout
+      - run: node --version     
+      - restore_cache:
+          key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
+          
+      - run:
+          command: |
+            - NODE_ENV=development npm ci
+            - npm audit --audit-level=moderate
+            - npm run lint
+            # build:
+            - npm run build
+            # post_build:
+            - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi" # check if build was successful. exit otherwise.
+            - npm run deploy
+
+      - save_cache:
+          key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
+          paths:
+            - '/root/.npm/**/*'
+
+
+workflows:
+  build-layer-workflow:
+    jobs:
+      - build-layer
+
+
+
+artifacts:
+  files:
+    - .aws-sam/**/*
