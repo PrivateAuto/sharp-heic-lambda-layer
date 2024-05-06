@@ -23,6 +23,7 @@ jobs:
       - run: | 
           NODE_ENV=development
           npm ci 
+          ls
           npm run build
 
       # - save_cache:
