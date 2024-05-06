@@ -18,7 +18,8 @@ jobs:
           
       - run:
           command: |
-            - NODE_ENV=development npm ci
+            - NODE_ENV=development
+            - npm ci 
             - npm audit --audit-level=moderate
             - npm run lint
             # build:
