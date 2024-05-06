@@ -13,8 +13,8 @@ jobs:
     steps:
       - checkout
       - run: node --version     
-      - restore_cache:
-          key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
+      # - restore_cache:
+      #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
           
       - run:
           command: |
@@ -27,11 +27,14 @@ jobs:
             - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi" # check if build was successful. exit otherwise.
             - npm run deploy
 
-      - save_cache:
-          key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-          paths:
-            - '/root/.npm/**/*'
+      # - save_cache:
+      #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
+      #    paths:
+      #      - '/root/.npm/**/*'
 
+# artifacts:
+#  files:
+#    - .aws-sam/**/*
 
 workflows:
   build-layer-workflow:
@@ -40,6 +43,3 @@ workflows:
 
 
 
-artifacts:
-  files:
-    - .aws-sam/**/*
