@@ -17,8 +17,8 @@ jobs:
     steps:
       - checkout
       - run: node --version  
-      - aws-cli/setup:
-          profile_name: default
+      - aws-cli/setup
+      - sam/install      
       
       # - restore_cache:
       #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
