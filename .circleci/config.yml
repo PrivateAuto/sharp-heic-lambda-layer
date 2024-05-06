@@ -19,10 +19,6 @@ jobs:
       - run: node --version  
       - aws-cli/setup:
           profile_name: default
-
-      - run: wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-arm64.zip  
-      - run: unzip aws-sam-cli-linux-arm64.zip -d sam-installation
-      - run: sudo ./sam-installation/install
       
       # - restore_cache:
       #    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
